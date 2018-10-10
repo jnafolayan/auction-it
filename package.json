@@ -1,0 +1,26 @@
+{
+  "name": "auctionit",
+  "version": "1.0.0",
+  "description": "bid for items through this app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --harmony server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "jafolayan@bitbucket.org/jafolayan/auctionit.git"
+  },
+  "keywords": [
+    "auction",
+    "sell",
+    "bid",
+    "buy",
+    "sales"
+  ],
+  "author": "John Afolayan <hughj32001@gmail.com> (softdemos.000webhostapp.com)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3",
+    "morgan": "^1.9.0"
+  }
+}
