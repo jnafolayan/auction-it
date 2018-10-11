@@ -1,0 +1,18 @@
+[
+	{
+		"tag": "Used furniture",
+		"by": "John Doe",
+		"baseAmount": 5000,
+		"currency": "USD - US Dollars",
+		"bids": [
+			{
+				"by": "Lilian Walker",
+				"amount": 5500
+			},
+			{
+				"by": "Carl Simmons",
+				"amount": 5200
+			}
+		]
+	}
+]

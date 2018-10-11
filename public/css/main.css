@@ -1,0 +1,127 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: hsl(0, 5%, 98%);
+	font-family: "Trebuchet MS";
+}
+
+.tabbed {
+	width: 95%;
+	margin: 0 auto;
+}
+
+.tabs {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+.tab {
+	display: inline;	
+	text-align: center;
+	float: left;
+	color: #fff;
+	padding: 15px 15px;
+	text-decoration: none;
+	background: #f26;
+}
+
+.tab.active {
+	background: #333;
+	color: #fff;
+	border-bottom: 3px solid #999;
+}
+
+.tab-targets {
+	padding: 25px 15px;
+	background: #333;
+}
+
+.navbar {
+	display: block;
+	padding: 20px 15px;
+	box-shadow: 0 0 15px 1px rgba(100,100,100,0.3);
+}
+
+.container {
+	position: relative;
+	width: 95vw;
+	padding: 10px;
+	margin: 10px auto;
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+	.container {
+		width: 90vw;
+	}
+}
+
+@media (min-width: 768px) {
+	.container {
+		width: 82vw;
+	}
+}
+
+.row {
+	position: relative;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+
+.row > div {
+	float: left;
+	height: auto;
+	margin: 0;
+	padding: 10px;
+}
+
+.row > .col-6 {
+	width: 50%;
+}
+
+@media (max-width: 600px) {
+	.row > .col-6 {
+		width: 100%;
+	}
+}
+
+.form-group {
+	width: 100%;
+	padding: 10px 0;
+	margin: 0 auto;
+}
+
+.form-group > input {
+	border: 1px solid #eee;
+	border-radius: 4px;
+	width: 100%;
+	height: 45px;
+	outline: none;
+	padding: 5px 10px;
+	font-size: 18px;
+	font-family: "Trebuchet MS";
+	font-weight: lighter;
+	background: rgba(255, 255, 255, 0.95);
+}
+
+.form-group > input::placeholder {
+	color: 777;
+}
+
+.btn {
+	padding: 10px 15px;
+	min-width: 150px;
+	text-align: center;
+	border-radius: 4px;
+	color: #333;
+	background: rgba(255, 255, 255, 0.95);
+	font-size: 16px;
+	margin-left: 12px;
+	font-family: "Trebuchet MS";
+	box-shadow: 0 0 15px 1px rgba(100,100,100,0.3);
+}
