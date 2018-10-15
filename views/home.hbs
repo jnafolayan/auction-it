@@ -1,0 +1,94 @@
+<!-- <nav class="navbar white text-center"> -->
+<!-- </nav> -->
+
+<div class="container white round cast-shadow m-t-20 m-b-20">
+	<h2 class="text-center p-t-20 p-b-10">
+		Auction <span class="text-red">IT!</span>
+	</h2>
+	<div class="row">
+		<div class="col-6 p-t-30 p-b-30 text-black text-center light">
+			<h2>Get your stuff sold <span class="text-red">easily</span>!</h2>
+			<div style="max-width: 97%;">
+				<p class="m-t-40 f-s-18">Place them on auction and let potential buyers place their bids!</p>
+				<p class="m-t-20 f-s-18">View bids real-time, sell anytime!</p>
+			</div>
+		</div>
+		<div class="col-6 p-t-40 p-b-40">
+			<div class="tabbed round">
+				<div class="tabs">
+					{{#if flash.loginError}}
+					<a href="#" data-target="signupForm" class="tab w-50">
+						Sign Up
+					</a>
+					<a href="#" data-target="signinForm" class="tab active w-50">
+						Sign In
+					</a>
+					{{else}}
+					<a href="#" data-target="signupForm" class="tab active w-50">
+						Sign Up
+					</a>
+					<a href="#" data-target="signinForm" class="tab w-50">
+						Sign In
+					</a>
+					{{/if}}
+				</div>
+				<div class="clear-fix"></div>
+				<div class="tab-targets">
+					{{#if flash.loginError}}
+					<div id="signupForm">
+					{{else}}
+					<div id="signupForm" class="active">
+					{{/if}}
+						{{#if flash.signupError}}
+						<p class="text-red">{{ flash.signupError }}</p>
+						{{/if}}
+						<form class="" action="/auth/signup" method="POST">
+							<input type="hidden" name="_csrf" value="{{csrf}}">
+							<div class="form-group w-95">
+								<input class="form-control" type="text" name="username" placeholder="Enter username" required>
+							</div>
+							<div class="form-group w-95">
+								<input class="form-control" type="text" name="fullname" placeholder="Enter full name" required>
+							</div>
+							<div class="form-group w-95">
+								<input class="form-control" type="tel" name="phone" placeholder="Enter phone number" required>
+							</div>
+							<div class="form-group w-95">
+								<input class="form-control" type="email" name="email" placeholder="Enter email" required>
+							</div>
+							<div class="form-group w-95">
+								<input class="form-control" type="password" name="password" placeholder="Enter password" required>
+							</div>
+							<div class="form-group">
+								<button class="btn" type="submit">SIGN UP</button>
+							</div>
+						</form>
+					</div>
+					{{#if flash.loginError}}
+					<div id="signinForm" class="active">
+					{{else}}
+					<div id="signinForm">
+					{{/if}}
+						{{#if flash.loginError}}
+						<p class="text-red">{{ flash.loginError }}</p>
+						{{/if}}
+						<form class="" action="/auth/login" method="POST">
+							<input type="hidden" name="_csrf" value="{{csrf}}">
+							<div class="form-group w-95">
+								<input class="form-control" type="text" name="username" placeholder="Enter username" required>
+							</div>
+							<div class="form-group w-95">
+								<input class="form-control" type="password" name="password" placeholder="Enter password" required>
+							</div>
+							<div class="form-group">
+								<button class="btn" type="submit">SIGN IN</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="clear-fix"></div>
+</div>

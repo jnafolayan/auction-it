@@ -1453,6 +1453,10 @@
 	color: #f26;
 }
 
+.text-white {
+	color: #fff;
+}
+
 .text-black {
 	color: #222;
 }
@@ -1464,6 +1468,10 @@
 
 .white {
 	background: #fff;
+}
+
+.red {
+	background: #f26;
 }
 
 
@@ -1497,8 +1505,8 @@
     border-radius: 0!important;
 }
 
-.round {
-	border-radius: 4px;
+.bordered {
+	border: 1px solid #ccc;
 }
 
 .card {

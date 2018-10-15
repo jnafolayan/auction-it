@@ -9,9 +9,87 @@ body {
 	font-family: "Trebuchet MS";
 }
 
+textarea.form-control {
+	width: 100%;
+	font-size: 18px;
+	outline: none;
+	border: none;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	z-index: 999px;
+	background: rgba(0,0,0,0.8);
+	width: 100vw;
+	height: 100vh;
+}
+
+.modal-content {
+	position: fixed;
+	height: auto;
+	top: -100vh;
+	width: 350px;
+	left: calc(50vw - 175px);
+
+	/*transition: top 0.8s;*/
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.modal-content {
+		width: 650px;
+		left: calc(50vw - 325px);
+	}
+}
+
+@media (min-width: 992px) {
+	.modal-content {
+		width: 700px;
+		left: calc(50vw - 350px);
+	}
+}
+
+.modal-header {
+	padding: 15px 20px;
+	text-align: center;
+	clear: both;
+}
+
+.modal-header .close {
+	float: right;
+	cursor: pointer;
+}
+
+.modal-body {
+	clear: both;
+	padding: 15px 15px;
+	background: #000;
+}
+
+.modal-body .btn {
+	color: #fff;
+}
+
+.list {
+	list-style: none;
+}
+
+.list > li {
+	padding: 10px 15px;
+	background: rgb(250,250,250);
+}
+
+.list > li:nth-child(even) {
+	background: rgba(230,230,230,0.8);
+}
+
 .tabbed {
 	width: 95%;
 	margin: 0 auto;
+	box-shadow: -1px 1px 2px 1px rgba(100,100,100,0.3);
 }
 
 .tabs {
@@ -28,65 +106,144 @@ body {
 	padding: 15px 15px;
 	text-decoration: none;
 	background: #f26;
+	transition: all 0.3s;
 }
 
 .tab.active {
 	background: #333;
 	color: #fff;
-	border-bottom: 3px solid #999;
 }
 
 .tab-targets {
+	border-left: 10px solid #333;
+	border-right: 10px solid #333;
+	border-bottom: 10px solid #333;
 	padding: 25px 15px;
-	background: #333;
+	background: rgba(3,3,3,0.9);
+}
+
+.tab-targets > div {
+	display: none;
+}
+
+.tab-targets > div.active {
+	display: block;
 }
 
 .navbar {
-	display: block;
+	display: flex;
+	align-items: center;
+	vertical-align: middle;
 	padding: 20px 15px;
 	box-shadow: 0 0 15px 1px rgba(100,100,100,0.3);
 }
 
+.navbar a {
+	text-decoration: none;
+}
+
+.navbar > div {
+	flex-basis: 1;
+}
+
+.navbar-left {
+	flex-basis: 30%;
+	text-align: left;
+	padding-left: 20px;
+}
+
+.navbar-center {
+	flex-basis: 40%;
+	text-align: center;
+}
+
+.navbar-right {
+	flex-basis: 30%;
+	text-align: right;
+	padding-right: 20px;
+}
+
 .container {
-	position: relative;
 	width: 95vw;
-	padding: 10px;
+	height: auto;
+	padding: 10px 20px;
 	margin: 10px auto;
 }
 
 @media (min-width: 600px) and (max-width: 767px) {
 	.container {
 		width: 90vw;
+		/*left: calc(50vw - 45vw);*/
 	}
 }
 
 @media (min-width: 768px) {
 	.container {
 		width: 82vw;
+		/*left: calc(50vw - 41vw);*/
 	}
+}
+
+.section {
+	/*padding: 10*/
 }
 
 .row {
 	position: relative;
+	display: flex;
+	align-items: top;
 	width: 100%;
 	height: auto;
 	margin: 0 auto;
+	clear: both;
 }
 
-.row > div {
-	float: left;
+.row div[class*="col"] {
 	height: auto;
 	margin: 0;
 	padding: 10px;
 }
 
-.row > .col-6 {
-	width: 50%;
+.row .col-1 {
+	flex-basis: 8.333333332%;
 }
 
-@media (max-width: 600px) {
-	.row > .col-6 {
-		width: 100%;
+.row .col-2 {
+	flex-basis: 16.66666664%;
+}
+
+.row .col-3 {
+	flex-basis: 25%;
+}
+
+.row .col-4 {
+	flex-basis: 33.33333333%;
+}
+
+.row .col-5 {
+	flex-basis: 41.66666667%;
+}
+
+.row .col-6 {
+	flex-basis: 50%;
+}
+
+.row .col-7 {
+	flex-basis: 58.33333336%;
+}
+
+.row .col-9 {
+	flex-basis: 75%;
+}
+
+.row .col-10 {
+	flex-basis: 83.33333334%;
+}
+
+
+@media (max-width: 767px) {
+	.row {
+		flex-direction: column;
 	}
 }
 
@@ -96,32 +253,90 @@ body {
 	margin: 0 auto;
 }
 
-.form-group > input {
-	border: 1px solid #eee;
-	border-radius: 4px;
-	width: 100%;
+#signupForm .form-group > input,
+#signinForm .form-group > input {
 	height: 45px;
-	outline: none;
-	padding: 5px 10px;
-	font-size: 18px;
-	font-family: "Trebuchet MS";
-	font-weight: lighter;
-	background: rgba(255, 255, 255, 0.95);
+	color: #fff;
+	background: #444;	
 }
 
-.form-group > input::placeholder {
-	color: 777;
+#signupForm .form-group > input:focus,
+#signinForm .form-group > input:focus {
+	background: #fff;
+	color: #333;
+}
+
+#signupForm .form-group > input::placeholder,
+#signinForm .form-group > input::placeholder {
+	color: #bbb;
 }
 
 .btn {
 	padding: 10px 15px;
-	min-width: 150px;
 	text-align: center;
 	border-radius: 4px;
+	outline: none;
+	border: none;
 	color: #333;
-	background: rgba(255, 255, 255, 0.95);
 	font-size: 16px;
-	margin-left: 12px;
 	font-family: "Trebuchet MS";
 	box-shadow: 0 0 15px 1px rgba(100,100,100,0.3);
+}
+
+#signupForm .btn, #signinForm .btn {
+	margin-left: 12px;
+	min-width: 150px;
+}
+
+.btn:hover {
+	cursor: pointer;
+}
+
+input.form-control {
+	width: 100%;
+	border: 1px solid #eee;
+	border-radius: 4px;
+	padding: 5px 10px;
+	font-size: 18px;
+	font-family: "Trebuchet MS";
+	font-weight: lighter;
+	outline: none;
+	border: none;
+	transition: all 0.3s;
+}
+
+.btn.form-control {
+	width: 100%;
+}
+
+.btn.circle {
+	color: #fff;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	padding: 0px;
+	border-radius: 50%;
+}
+
+.btn.circle.fixed {
+	position: fixed;
+	right: 50px;
+	bottom: 50px;
+}
+
+#auctionSearch {
+	margin: 10px auto;
+}
+
+#auctionSearch input {
+	border: 1px solid #ccc;
+	height: 45px;
+	background: rgba(230, 230, 230, 0.8);
+	color: #000;
+	text-align: center;
+}
+
+#auctionSearch .btn {
+	height: 45px;
+	color: #fff;
 }

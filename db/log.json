@@ -1,18 +1,1 @@
-[
-	{
-		"tag": "Used furniture",
-		"by": "John Doe",
-		"baseAmount": 5000,
-		"currency": "USD - US Dollars",
-		"bids": [
-			{
-				"by": "Lilian Walker",
-				"amount": 5500
-			},
-			{
-				"by": "Carl Simmons",
-				"amount": 5200
-			}
-		]
-	}
-]
+{"users":[{"username":"johndoe","fullname":"John Doe","phone":"0815 576 2404","email":"hughj32001@gmail.com","password":"$2a$08$vrsrwbO59As5TzFULWNLi.2g2kJyy8e5rR6qgDhlhG0slR1YqdZqW"}],"auctions":[{"id":"","item":"shoe","itemDesc":"fairly used","itemPrice":5000,"bidders":[],"by":"johndoe"}]}

@@ -1,0 +1,90 @@
+<nav class="navbar white">
+	<div class="navbar-left"></div>
+	<div class="navbar-center">
+		<h3>Auction <span class="text-red">IT!</span></h3>
+	</div>
+	<div class="navbar-right f-s-16">
+		<a href="/logout">Logout</a>
+	</div>
+</nav>
+
+<div class="container white cast-shadow" style="min-height: 85vh;">
+	<form action="" method="POST">
+		<div id="auctionSearch" class="row">
+			<!-- <div class="col-1"></div> -->
+			<div class="col-4">
+				<input type="text" name="auctionid" class="form-control" placeholder="Enter auction id" required>
+			</div>
+			<div class="col-2">
+				<button class="btn red form-control">SEARCH</button>
+			</div>
+		</div>
+	</form>
+
+	<div class="row" style="min-height: 50vh;">
+		<div class="col-7">
+			<h3 class="p-b-10" style="border-bottom: 2px solid #ccc;">All Auctions</h3>
+			{{#if auctions.length}}
+			<ul class="list">
+			{{#each auctions}}
+				<li>
+					<p class="text-black light m-b-10">{{ item }} - {{ itemPrice }}</p>
+					<p class="text-black light">{{ itemDesc }}</p>
+				</li>			
+			{{/each}}
+			</ul>
+			{{else}}
+			<p>There are no auctions scheduled at the moment.</p>
+			{{/if}}
+		</div>
+
+		<div class="col-5 round bordered p-0">
+			<h3 class="red text-white text-center p-t-10 p-b-10 p-l-10 p-r-10">Active</h3>
+			{{#if activeAuctions.length}}
+			<ul class="list">
+			{{#each activeAuctions}}
+				<li>
+					<p class="text-black light m-b-10">{{ item }} - {{ itemPrice }}</p>
+					<p class="text-black light">{{ itemDesc }}</p>
+				</li>			
+			{{/each}}
+			</ul>
+			{{else}}
+			<p class="p-l-10 p-r-10 p-b-20 text-black light">There are no active auctions at the moment.</p>
+			{{/if}}
+		</div>
+	</div>
+
+	<button type="button" class="btn circle fixed red f-s-30" title="Create auction" id="createAuction">&plus;</button>
+</div>
+
+<div class="modal cast-shadow" id="createAuctionModal">
+	<div class="modal-content">
+		<div class="modal-header red text-white">
+			CREATE AUCTION
+			<span class="close">&times;</span>
+		</div>
+		<div class="modal-body">
+			<form action="/auctions/create" method="POST">
+				<div class="form-group">
+					<label for="item" class="text-white">What item are you selling ?</label>
+					<br>
+					<input type="text" class="form-control" name="item" id="item" required>
+				</div>
+				<div class="form-group">
+					<label for="itemDesc" class="text-white">Describe in detail (<span id="descCount">150</span> chars)</label>
+					<br>
+					<textarea id="itemDesc" name="itemDesc" class="form-control" rows="5" cols="40" maxlength="150" required></textarea>
+				</div>
+				<div class="form-group">
+					<label for="itemPrice" class="text-white">Enter base price:</label>
+					<br>
+					<input type="number" class="form-control" name="itemPrice" required>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn red">CREATE</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
