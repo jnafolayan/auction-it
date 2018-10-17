@@ -24,6 +24,11 @@ $(window).on('load', function(evt) {
 					let by = res.user.fullname;
 					initCountdown($('.auction.open').get(0), res.auction);
 
+					if (!util.auction.isOpen(res.auction))
+						$('#bidForm').hide();
+					else
+						$('#bidForm').show();
+
 					$('#bidForm').on('submit', function(evt) {
 						evt.preventDefault();
 						let bid = +$("#bid").get(0).value;
@@ -147,12 +152,11 @@ function initCountdown(el, auc) {
 		});
 
 		if (diff <= 0) {
-			status.html('CLOSED');
+			status.html('CLOSED'.split('').join('<br>'));
 			$el.removeClass('open');
 		} else {
 			if (isSingle)
-				status.html('');
-				// status.html('<span class="text-white">' + arr.join('') + "</span>");
+				status.html('<span class="text-white">' + arr.join('') + "</span>");
 			else
 				status.html('Closing in <span class="text-green">' + arr.join('') + "</span>");
 

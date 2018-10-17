@@ -35,13 +35,25 @@ db.updateOne = promisify((table, query, update, cb) => {
 				{
 					let props = update[type];
 					if (type === '__concat')
+					{
 						for (let key in props) 
+						{
 							if ((key in rec) && Array.isArray(props[key]))
+							{
 								rec[key] = rec[key].concat(props[key]);
+							}
+						}
+					}
 					else
+					{
 						for (let key in props) 
+						{
 							if (key in rec)
+							{
 								rec[key] = props[key];
+							}
+						}
+					}
 				}
 				return db.write().then(() => cb(null, true));		
 			}

@@ -7,30 +7,12 @@
 	function _$(selector, context) {
 		if (!context) context = document;
 
-		let m, list;
-
-		let count = 0;
-		['.', '#', '[', ']'].forEach(function(f) {
-			if (typeof selector === 'string' && (m = selector.match( new RegExp('\\' + f , 'g') ))) 
-				count += m.length;
-		});
-
-		if (count > 1) {
-			list = context.querySelectorAll(selector);
-		}
-		else if (selector === window || selector === document)
+		let list;
+			
+		if (selector === window || selector === document)
 			list = [selector];
 		else if (selector instanceof HTMLElement)
 			list = [selector];
-		else if ((selector.hasOwnProperty('length')) && selector.forEach)
-			list = selector;
-		else if (typeof selector === 'string')
-			if (m = selector.match(/^\.(.*)/))
-				list = context.getElementsByClassName(m[1]);
-			else if (m = selector.match(/^#(.*)/))
-				list = [context.getElementById(m[1])];
-			else 
-				list = context.getElementsByTagName(selector);
 		else 
 			list = context.querySelectorAll(selector);
 
@@ -110,6 +92,10 @@
 
 		show: function() {
 			return this.css('display', 'block');
+		},
+
+		hide: function() {
+			return this.css('display', 'none');
 		},
 
 		html: function(value) {

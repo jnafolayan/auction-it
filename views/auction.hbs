@@ -16,7 +16,7 @@
 		<div class="gray p-t-10 p-l-20 p-r-20 p-b-20">
 			<p class="p-t-10">{{auction.item}} by {{auction.by}}</p>
 			{{#with auction}}
-				<p class="p-t-10 text-black light">{{itemDesc}}</p>
+				<p class="p-t-10 text-black light" style="max-width: 80%;">{{itemDesc}}</p>
 				<p class="p-t-10 text-black light">Start price: ${{itemPrice}}</p>
 				<p class="p-t-10 text-green" id="highestBid">Highest bid: $<span>{{highestBid}}</span></p>
 			{{/with}}
@@ -28,7 +28,7 @@
 			{{/each}}
 		</div>
 
-		<form id="bidForm" action="" method="POST">
+		<form id="bidForm" action="" method="POST" style="display: none;">
 			<div class="row">
 				<div class="col-3">
 					<input class="form-control gray" type="number" name="bid" id="bid" required>
