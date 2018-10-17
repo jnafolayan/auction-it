@@ -4,7 +4,7 @@ const HomeController = BaseController.extend({
 	view: 'home',
 
 	getContent() {
-		return { title: 'AuctionIt' };
+		return { title: 'AuctionIT!' };
 	}
 });
 

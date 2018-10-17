@@ -11,6 +11,7 @@ let auctionSchema = {
 	item: String,
 	itemDesc: String,
 	itemPrice: Number,
+	highestBid: Number,
 	bidders: Array,
 	by: String,
 	startDate: String,
@@ -23,15 +24,18 @@ let auctionSchema = {
  * @param {object} opts - config object
  */
 class Auction {
-	constructor(opts) {
+	constructor(opts, isOld) {
 		this.id = null;
 
 
 		for (let key in auctionSchema) {
-			if (key in opts)
-				this[key] = auctionSchema[key](opts[key]);
+			if (isOld) 
+				this[key] = opts[key];
 			else
-				this[key] = auctionSchema[key]();
+				if (key in opts)
+					this[key] = auctionSchema[key](opts[key]);
+				else
+					this[key] = auctionSchema[key]();
 		}
 	}
 
@@ -51,21 +55,21 @@ class Auction {
 			charset[b] = tmp;
 		}
 
-		function gen() {
-			let id = '';
-			while (len--) {
+		let i, id;
+
+		async function gen() {
+			i = len;
+			id = '';
+			while (i--) {
 				id += charset[Math.floor(Math.random() * charset.length)];
 			}
+			let exists = await Auction.exists(id);
+			if (exists)
+				return gen();
 			return id;
 		}
 
-		let id = gen();
-		while (true) {
-			let exists = await Auction.exists(id);
-			if (!exists) break;
-		}
-
-
+		id = await gen();
 		return id;
 	}
 
@@ -87,13 +91,18 @@ class Auction {
 	static find(query) {
 		return db
 			.find('auctions', query)
-			.then(auctions => auctions.map(a => new Auction(a)));
+			.then(auctions => auctions.map(a => new Auction(a, true)));
 	}
 
 	static findOne(query) {
 		return db
 			.findOne('auctions', query)
-			.then(auction => auction ? new Auction(auction) : null);
+			.then(auction => auction ? new Auction(auction, true) : null);
+	}
+
+	static updateOne(query, update) {
+		return db
+			.updateOne('auctions', query, update);
 	}
 
 	/**
@@ -109,6 +118,15 @@ class Auction {
 		cur = new Date().getTime();
 
 		return cur >= start && cur < end; 
+	}
+
+	/**
+	 * Computes how long an auction has been closed for.
+	 * @param {Auction} auc 
+	 * @return {number}
+	 */
+	static getClosedPeriod(auc) {
+		return new Date().getTime() - new Date(auc.endDate).getTime();
 	}
 }
 

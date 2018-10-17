@@ -18,7 +18,8 @@ const BaseController = {
 
 		// Enforce scope
 		ctrl.exec = ctrl.exec.bind(ctrl);
-		
+		ctrl.jsonExec = ctrl.jsonExec.bind(ctrl);
+
 		return ctrl;
 	},
 
@@ -40,7 +41,7 @@ const BaseController = {
 		if (req.isAuth())
 			next();
 		else 
-			res.json({ error: 500, message: 'Forbidden' });
+			res.json({ error: true, status: 403, message: 'Forbidden' });
 	},
 
 	getContent(req, res) {
@@ -55,7 +56,18 @@ const BaseController = {
 	 */
 	exec(req, res, next) {
 		// placeholder function
-		res.render(this.view, this.getContent(req, res));
+		res.render(this.view, this.getContent(req, res, next));
+	},
+
+	/**
+	 * Executes main logic. It is unique to some controllers.
+	 * @param {request} req - the request object
+	 * @param {response} res - the response object
+	 * @param {next} next - pass control to the next middleware
+	 */
+	jsonExec(req, res, next) {
+		// placeholder function
+		res.json(this.getContent(req, res, next));
 	}
 };
 

@@ -26,15 +26,30 @@ db.create = (table, obj) => {
 	return db.write().then(() => true);
 };
 
-db.update = (table, query, obj) => {
-	return db.find(table, query)
+db.updateOne = promisify((table, query, update, cb) => {
+	return db.findOne(table, query)
 		.then((rec) => {
-			for (let k in obj) {
-				rec[k] = obj[k];
+			if (rec) 
+			{
+				for (let type in update)
+				{
+					let props = update[type];
+					if (type === '__concat')
+						for (let key in props) 
+							if ((key in rec) && Array.isArray(props[key]))
+								rec[key] = rec[key].concat(props[key]);
+					else
+						for (let key in props) 
+							if (key in rec)
+								rec[key] = props[key];
+				}
+				return db.write().then(() => cb(null, true));		
 			}
-			return rec;
-		});
-};
+
+			return cb(null, false);
+		})
+		.catch(() => cb(null, false));
+});
 
 db.findOne = promisify((table, query, cb) => {
 	records[table] = records[table] || [];
@@ -72,5 +87,6 @@ db.find = promisify((table, query, cb) => {
 
 db.connect = () => {
 	db.retrieve();
+	// Keep updating the db
 	setInterval(() => db.retrieve(), 5000);
 };

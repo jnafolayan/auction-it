@@ -1,19 +1,23 @@
 (function() {
 
-	function $(selector) {
-		return new _$(selector);
+	function $(selector, context) {
+		return new _$(selector, context);
 	}
 
 	function _$(selector, context) {
 		if (!context) context = document;
+
 		let m, list;
 
-		let count = ['.', '#', '[', ']'].filter(function(f) {
-			return (typeof selector === 'string' && selector.includes(f));
-		}).length;
+		let count = 0;
+		['.', '#', '[', ']'].forEach(function(f) {
+			if (typeof selector === 'string' && (m = selector.match( new RegExp('\\' + f , 'g') ))) 
+				count += m.length;
+		});
 
-		if (count > 1) 
+		if (count > 1) {
 			list = context.querySelectorAll(selector);
+		}
 		else if (selector === window || selector === document)
 			list = [selector];
 		else if (selector instanceof HTMLElement)
@@ -39,6 +43,13 @@
 		_each: function(iterator, args) {
 			this._elements.forEach(function(el, i, elements) {
 				el && iterator.apply(el, [el].concat(args ? args : []).concat([i, elements]));
+			});
+			return this;
+		},
+
+		each: function(iterator) {
+			this._elements.forEach(function(el, i, elements) {
+				el && iterator(el,i,elements);
 			});
 			return this;
 		},
@@ -84,6 +95,10 @@
 				el.classList.remove(name);
 			});
 			return this;
+		},
+
+		hasClass: function(name) {
+			return this.get(0).classList.contains(name);
 		},
 
 		css: function(key, value) {

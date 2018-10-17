@@ -7,7 +7,10 @@ const LoginController = BaseController.extend({
 		let user = await User.findOne({ username: req.body.username });
 		if (user) {
 			if (user.passwordEqual(req.body.password)) {
-				req.session.user = req.body.username;
+				req.session.user = {
+					username: user.username,
+					fullname: user.fullname
+				};
 				res.redirect(303, '/auctions');
 			} else {
 				req.session.flash.loginError = 'Invalid password.';

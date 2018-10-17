@@ -10,7 +10,11 @@
 	</head>
 	<body>
 		{{{body}}}
-		<script type="text/javascript" src="js/dom.js"></script>
-		<script type="text/javascript" src="js/main.js"></script>
+		{{#unless hasOwnScripts}}
+			<script type="text/javascript" src="js/util.js"></script>
+			<script type="text/javascript" src="js/dom.js"></script>
+			<script type="text/javascript" src="js/main.js"></script>
+		{{/unless}}
+		{{{block 'scripts'}}}
 	</body>
 </html>

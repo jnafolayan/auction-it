@@ -1,0 +1,53 @@
+<nav class="navbar white">
+	<div class="navbar-left"></div>
+	<div class="navbar-center">
+		<a href="/">
+			<h3>Auction <span class="text-red">IT!</span></h3>
+		</a>
+	</div>
+	<div class="navbar-right f-s-16">
+		<a href="/auctions">Auctions</a>
+		<a href="/logout">Logout</a>
+	</div>
+</nav>
+
+<div class="container white cast-shadow p-0">
+	<div class="auction auction-single open">
+		<div class="gray p-t-10 p-l-20 p-r-20 p-b-20">
+			<p class="p-t-10">{{auction.item}} by {{auction.by}}</p>
+			{{#with auction}}
+				<p class="p-t-10 text-black light">{{itemDesc}}</p>
+				<p class="p-t-10 text-black light">Start price: ${{itemPrice}}</p>
+				<p class="p-t-10 text-green" id="highestBid">Highest bid: $<span>{{highestBid}}</span></p>
+			{{/with}}
+		</div>
+
+		<div id="bids">
+			{{#each auction.bidders}}
+				<p class="bid">${{amount}} from {{by}}</p>
+			{{/each}}
+		</div>
+
+		<form id="bidForm" action="" method="POST">
+			<div class="row">
+				<div class="col-3">
+					<input class="form-control gray" type="number" name="bid" id="bid" required>
+				</div>
+				<div class="col-1">
+					<button type="submit" class="btn red form-control">BID</button>
+				</div>
+			</div>
+		</form>
+
+		<div class="status">
+
+		</div>
+	</div>
+</div>
+
+{{#contentFor 'scripts'}}
+	<script type="text/javascript" src="../js/util.js"></script>
+	<script type="text/javascript" src="../js/dom.js"></script>
+	<script type="text/javascript" src="../js/main.js"></script>
+	<script type="text/javascript" src="../js/auctions.js"></script>
+{{/contentFor}}

@@ -1453,6 +1453,10 @@
 	color: #f26;
 }
 
+.text-green {
+	color: #3d4;
+}
+
 .text-white {
 	color: #fff;
 }
@@ -1472,6 +1476,10 @@
 
 .red {
 	background: #f26;
+}
+
+.gray {
+	background: #eee;
 }
 
 

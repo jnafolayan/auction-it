@@ -30,7 +30,10 @@ const LoginController = BaseController.extend({
 			let newUser = new User(req.body);
 			let success = await newUser.save();
 			if (success) {
-				req.session.user = req.body.username;
+				req.session.user = {
+					username: req.body.username,
+					fullname: req.body.fullname
+				};
 				res.redirect(303, '/auctions');
 			} else {
 				req.session.flash.signupError = 'Couldn\'t create user profile';

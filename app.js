@@ -14,21 +14,23 @@ const
 	controllers = require('./controllers');
 
 const SECRET = 'auctionit!';
+	
+/**
+  * Handlebars helpers
+  */
+hbs.registerHelper('section', (name, options) => {
+	if (!this._sections)
+		this._sections = {};
+	this._sections[name] = options.fn(this);
+	return null;
+});
 
 const hbsEngine = hbs.express4({
 	viewsDir: path.join(__dirname, 'views'),
 	layoutsDir: path.resolve(__dirname, 'views', 'layouts'),
 	partialDir: path.resolve(__dirname, 'views', 'partials'),
 	defaultLayout: path.resolve( __dirname, 'views', 'layouts', 'default'),
-	extname: '.hbs',
-	helpers: {
-		section: function(name, options) {
-			if (!this._sections)
-				this._sections = {};
-			this._sections[name] = options.fn(this);
-			return null;
-		}
-	}
+	extname: '.hbs'
 });
 
 app.engine('hbs', hbsEngine);
@@ -37,8 +39,8 @@ app.set('view engine', 'hbs');
 
 // app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser(SECRET));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ 
 	secret: SECRET,
 	saveUninitialized: true,
